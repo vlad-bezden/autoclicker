@@ -13,3 +13,5 @@
 ## Requirements
 * Python 3.6 and up
 * pyautogui library
+
+  pip install pyautogui
