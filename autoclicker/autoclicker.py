@@ -11,12 +11,12 @@ class ClickingThread(threading.Thread):
         super().__init__()
         self.interval = interval
         self.daemon = True
-        self.click = True
+        self.can_run = True
 
     def run(self):
         while True:
             time.sleep(self.interval)
-            if self.click:
+            if self.can_run:
                 print(time.strftime('%H:%M:%S'))
                 pyautogui.click()
 
@@ -30,8 +30,8 @@ def main():
         clicker.start()
         while True:
             input()
-            clicker.click = not clicker.click
-            print(f'{"Running" if clicker.click else "Paused"}')
+            clicker.can_run = not clicker.can_run
+            print(f'{"Running" if clicker.can_run else "Paused"}')
     except KeyboardInterrupt:
         print('Exiting by user request')
     except Exception as e:
