@@ -2,11 +2,11 @@
 
 import pyautogui
 import time
-import threading
+from threading import Thread
 import argparse
 
 
-class ClickingThread(threading.Thread):
+class ClickingThread(Thread):
     def __init__(self, interval):
         super().__init__()
         self.interval = interval
