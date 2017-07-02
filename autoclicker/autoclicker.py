@@ -15,8 +15,8 @@ class ClickingThread(threading.Thread):
 
     def run(self):
         while True:
+            time.sleep(self.interval)
             if self.click:
-                time.sleep(self.interval)
                 print(time.strftime('%H:%M:%S'))
                 pyautogui.click()
 
