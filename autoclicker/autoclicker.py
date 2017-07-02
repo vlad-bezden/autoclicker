@@ -34,10 +34,7 @@ def main():
         clicker.start()
         while True:
             input()
-            if ev.is_set():
-                ev.clear()
-            else:
-                ev.set()
+            ev.clear() if ev.is_set() else ev.set()
             print(f'{"Running" if ev.is_set() else "Paused"}')
     except KeyboardInterrupt:
         print('Exiting by user request')
