@@ -3,20 +3,22 @@
 import pyautogui
 import time
 from threading import Thread
+from threading import Event
 import argparse
 
 
 class ClickingThread(Thread):
-    def __init__(self, interval):
+    def __init__(self, interval, ev):
         super().__init__()
         self.interval = interval
         self.daemon = True
-        self.can_run = True
+        self.ev = ev
 
     def run(self):
         while True:
+            self.ev.wait()
             time.sleep(self.interval)
-            if self.can_run:
+            if self.ev.is_set():
                 print(time.strftime('%H:%M:%S'))
                 pyautogui.click()
 
@@ -26,12 +28,17 @@ def main():
         interval = parse_args().interval
         print(f"Mouse will click every {interval} seconds\n"
               "Press Enter for pause and resume program")
-        clicker = ClickingThread(interval)
+        ev = Event()
+        ev.set()
+        clicker = ClickingThread(interval, ev)
         clicker.start()
         while True:
             input()
-            clicker.can_run = not clicker.can_run
-            print(f'{"Running" if clicker.can_run else "Paused"}')
+            if ev.is_set():
+                ev.clear()
+            else:
+                ev.set()
+            print(f'{"Running" if ev.is_set() else "Paused"}')
     except KeyboardInterrupt:
         print('Exiting by user request')
     except Exception as e:
