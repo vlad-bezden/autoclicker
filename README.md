@@ -10,6 +10,9 @@
 
   This example will click every 10 seconds
 
+Press 'Enter' key to 'Pause' and 'Resume' autoclicker
+To stop running press 'Ctrl'+'C' keys
+
 ## Requirements
 * Python 3.6 and up
 * pyautogui library

@@ -24,8 +24,8 @@ class ClickingThread(threading.Thread):
 def main():
     try:
         interval = parse_args().interval
-        print(f'Mouse will click every {interval} seconds')
-        print('Press Enter for pause and resume program')
+        print(f"Mouse will click every {interval} seconds\n"
+              "Press Enter for pause and resume program")
         clicker = ClickingThread(interval)
         clicker.start()
         while True:
