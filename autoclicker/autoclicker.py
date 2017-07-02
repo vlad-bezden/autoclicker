@@ -15,8 +15,7 @@ class ClickingThread(Thread):
         self.ev = ev
 
     def run(self):
-        while True:
-            self.ev.wait()
+        while self.ev.wait():
             time.sleep(self.interval)
             if self.ev.is_set():
                 print(time.strftime('%H:%M:%S'))
