@@ -1,10 +1,11 @@
 """Mouse simulation clicker"""
 
-import pyautogui
 import time
 from threading import Thread
 from threading import Event
 import argparse
+
+import pyautogui
 
 
 class ClickingThread(Thread):
@@ -18,15 +19,17 @@ class ClickingThread(Thread):
         while self.ev.wait():
             time.sleep(self.interval)
             if self.ev.is_set():
-                print(time.strftime('%H:%M:%S'))
+                print(time.strftime("%H:%M:%S"))
                 pyautogui.click()
 
 
 def main():
     try:
         interval = parse_args().interval
-        print(f"Mouse will click every {interval} seconds\n"
-              "Press Enter for pause and resume program")
+        print(
+            f"Mouse will click every {interval} seconds\n"
+            "Press Enter for pause and resume program"
+        )
         ev = Event()
         ev.set()
         clicker = ClickingThread(interval, ev)
@@ -36,21 +39,22 @@ def main():
             ev.clear() if ev.is_set() else ev.set()
             print(f'{"Running" if ev.is_set() else "Paused"}')
     except KeyboardInterrupt:
-        print('Exiting by user request')
+        print("Exiting by user request")
     except Exception as e:
-        print('Unexpected error:', str(e))
+        print("Unexpected error:", str(e))
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Simulate user mouse click')
+    parser = argparse.ArgumentParser(description="Simulate user mouse click")
     parser.add_argument(
-        '-i',
-        '--interval',
+        "-i",
+        "--interval",
         type=int,
         default=60,
-        help='Time in seconds mouse will click. Default time is 60 secs')
+        help="Time in seconds mouse will click. Default time is 60 secs",
+    )
     return parser.parse_args()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
