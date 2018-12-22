@@ -15,6 +15,12 @@ To stop running press 'Ctrl'+'C' keys
 
 ## Requirements
 * Python 3.6 and up
-* pyautogui library
 
-  pip install pyautogui
+  `pip install -r requirements.txt`
+
+## Developers
+  `pip install -r requirements_dev.txt`
+
+* to build a wheel
+
+  `python setup.py bdist_wheel`
