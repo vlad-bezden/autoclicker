@@ -23,4 +23,4 @@ To stop running press 'Ctrl'+'C' keys
 
 * to build a wheel
 
-  `python setup.py bdist_wheel`
+  `python setup.py sdist bdist_wheel`
